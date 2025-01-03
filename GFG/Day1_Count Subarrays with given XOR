@@ -1,0 +1,33 @@
+//https://www.geeksforgeeks.org/problems/count-subarray-with-given-xor/1
+
+
+
+class Solution {
+  public:
+    long subarrayXor(vector<int> &arr, int k) {
+        // code here
+        long ans = 0; //  subarray ko count karne ke liye 
+        map<int, int> m; // prefix xor frequencies ko store karne ke liye
+        int x = 0; // prefix xor intilize
+        
+        for(auto &it : arr){
+            x ^= it; // prefix xor update krenge with current ele
+            
+            ans += m[x ^ k]; // agar map me yeh exist krta hai toh add it to ans
+            
+            if(x == k) {
+                ans += 1;
+            }
+            
+            m[x]++;
+            
+            
+            
+        }
+        return ans;
+        
+        
+        
+    }
+};
+
