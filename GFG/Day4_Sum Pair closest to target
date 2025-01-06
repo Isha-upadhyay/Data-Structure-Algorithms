@@ -1,0 +1,51 @@
+//Sum Pair closest to target
+//https://www.geeksforgeeks.org/problems/pair-in-array-whose-sum-is-closest-to-x1124/1
+
+
+class Solution {
+  public:
+    vector<int> sumClosest(vector<int>& arr, int target) {
+        // code here
+       vector<int> ans;
+       
+       sort(arr.begin(), arr.end());
+       int n = arr.size();
+       
+       int i = 0;
+       int j = n - 1;
+       
+       while(i < j){
+           int currSum = arr[i] + arr[j];
+           
+           if(ans.empty()){
+               ans.push_back(arr[i]);
+               ans.push_back(arr[j]);
+           }
+           
+           //agar  current pair closer hai target se toh ans update kr denge
+           if(abs(target - currSum) < abs(target -(ans[0] + ans[1]))){
+               ans[0] = arr[i];
+               ans[1] = arr[j];
+           }
+           
+           // closest sum same hai toh difernce jiska jada ho vo lenge 
+           else if(abs(target - currSum) == abs(target -(ans[0] + ans[1]))){
+               if(abs(arr[j] - arr[i]) > abs(ans[1] - ans[0])){
+                   ans[0] = arr[i];
+                   ans[1] = arr[j];
+               }
+           }
+        
+        if(currSum <= target){
+            i++;
+        }else{
+            j++;
+        }
+       }
+           
+       
+       return ans ;
+    }
+};
+
+
