@@ -6,7 +6,8 @@ Hi! I am **Isha Upadhyay**, a passionate learner diving deep into the world of *
 - [My LeetCode Profile](https://leetcode.com/u/Isha_upadhyay123/)
 - [My GeeksforGeeks Profile](https://www.geeksforgeeks.org/user/isha962lg0p/)
 
-[DSA Streak](![image](https://github.com/user-attachments/assets/bc5a1144-26b5-476d-891f-d8e7fd9ddc9c)
+[DSA Streak](![image](https://github.com/user-attachments/assets/46cdc391-e248-46cc-b675-caf123d434d3)
+
 
 
 ## The Streak Series
