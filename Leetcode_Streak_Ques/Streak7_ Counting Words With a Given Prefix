@@ -1,0 +1,79 @@
+//Trie ek special tree-like data structure hai jo strings ke saath efficiently kaam karta hai,
+jaise prefix search, word insertion, aur word lookup. Har node ek character ko represent karti hai,
+aur root node se kisi bhi node tak ka path ek prefix ya word banata hai.
+
+//Trie ka do main use hota hai:-----
+//->Insertion: Kisi word ko insert karne ke liye root se shuru karte hain aur har character ke liye
+naye nodes banate hain agar woh exist nahi karta. Word ke end par last node ko mark karte hain, jo 
+batata hai ki word complete ho gaya.
+
+//->Search for a Prefix: Agar check karna ho ki koi word kisi prefix se shuru hota hai, toh Trie ke 
+nodes ko prefix ke har character ke liye traverse karte hain. Agar successfully traverse ho jaye, 
+toh prefix Trie me exist karta hai.
+
+
+
+
+
+struct trieNode {
+    trieNode* children[26]; // 26 alphabets ke liye array of pointers
+    bool isEndOfWord;       // Word yahan khatam hota hai ya nahi
+    int count;              // Kitne prefixes iss node tak exist karte hain
+};
+
+trieNode* getNode() {
+    trieNode* newNode = new trieNode(); // Nayi node banayi
+    newNode->isEndOfWord = false;       // By default, end of word nahi hai
+    newNode->count = 0;                 // Prefix count initially 0
+    for (int i = 0; i < 26; i++) {
+        newNode->children[i] = NULL; // Saare children NULL hain
+    }
+    return newNode;
+}
+
+class Trie {
+public:
+    trieNode* root;
+
+    Trie() {
+        root = getNode(); // Root node initialize ki
+    }
+
+    void insert(string word) {
+        trieNode* pointer = root; // Root node se shuru
+        for (char& ch : word) {   // Word ke har character ke liye
+            int idx = ch - 'a';   // Character ka index calculate kiya
+            if (pointer->children[idx] == NULL) {
+                pointer->children[idx] =
+                    getNode(); // Agar node nahi hai, toh naye node banayi
+            }
+            pointer = pointer->children[idx]; // Aage move kiya
+            pointer->count++;                 // Prefix count increment
+        }
+        pointer->isEndOfWord = true; // Word yahan end hota hai
+    }
+
+    int searchPrefixCount(string& pref) {
+        trieNode* pointer = root; // Root se shuru
+        for (char& ch : pref) {
+            int idx = ch - 'a'; // Prefix ka character index
+            if (pointer->children[idx] == NULL) {
+                return 0; // Agar prefix exist nahi karta, return 0
+            }
+            pointer = pointer->children[idx]; // Aage move kiya
+        }
+        return pointer->count; // Prefix count return
+    }
+};
+class Solution {
+public:
+    int prefixCount(vector<string>& words, string pref) {
+        Trie trie;
+
+        for (string& word : words) {
+            trie.insert(word); // Har word ko trie mein insert kiya
+        }
+
+        return trie.searchPrefixCount(pref); // Prefix count search kiya
+    }
+};
