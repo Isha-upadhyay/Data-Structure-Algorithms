@@ -1,0 +1,28 @@
+
+class Solution {
+  public:
+    int longestUniqueSubstr(string &s) {
+        // code here
+        int n = s.size();
+        int i=0, j=0;
+        unordered_set<char> st;
+        int ans = 0;
+        
+        while(j<n){
+            if(st.find(s[j]) != st.end()){//agar hume duplicate milta hai toh usko remove kar do
+                while(s[i] != s[j]){
+                    st.erase(s[i]);
+                    i++;
+                }
+                i++;
+            }else{
+                st.insert(s[j]); //aur agar st me vo element ni toh daal do set me 
+            }
+            j++;
+            ans = max(ans, j-i); //ans ko update kar do
+        }
+        return ans;
+        
+    }
+};
+
