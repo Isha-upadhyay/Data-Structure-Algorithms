@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<int> findThePrefixCommonArray(vector<int>& A, vector<int>& B) {
+        unordered_set<int> seenA, seenB; // Hash tables to track seen elements
+    vector<int> C(A.size());         // Result vector
+    int commonCount = 0;             // Count of common elements
+
+    for (int i = 0; i < A.size(); i++) {
+        // Check if the current element in A is already seen in B
+        if (seenB.count(A[i])) {
+            commonCount++;
+        }
+        // Add current element of A to the seenA set
+        seenA.insert(A[i]);
+
+        // Check if the current element in B is already seen in A
+        if (seenA.count(B[i])) {
+            commonCount++;
+        }
+        // Add current element of B to the seenB set
+        seenB.insert(B[i]);
+
+        // Update the result for index i
+        C[i] = commonCount;
+    }
+
+    return C;
+    }
+};
