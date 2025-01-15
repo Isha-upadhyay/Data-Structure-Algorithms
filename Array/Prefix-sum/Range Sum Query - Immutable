@@ -1,0 +1,16 @@
+class NumArray {
+public:
+vector<int>prefix;
+    NumArray(vector<int>& nums) {
+        int n=nums.size();
+        prefix.resize(n+1,0);
+        for(int i=0;i<n;i++){
+            prefix[i+1]=nums[i]+prefix[i];
+        }
+
+    }
+    
+    int sumRange(int left, int right) {
+        int sum=prefix[right+1]-prefix[left]; 
+        return sum;   }
+};
