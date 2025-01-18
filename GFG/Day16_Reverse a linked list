@@ -1,0 +1,17 @@
+class Solution {
+  public:
+    Node* reverseList(struct Node* head) {
+        // code here
+        Node* prev = nullptr;
+        Node* curr = head;
+        Node* next = nullptr;
+        
+        while(curr!=nullptr){
+            next = curr->next;//Current node ka next store karo.
+            curr -> next = prev; //curr ka pointer reverse kr denge
+            prev = curr; //prev ko aage badha denge 
+            curr = next;//aur jo next ki value hogu curr vha chala jayega 
+        }
+        return prev;
+    }
+};
