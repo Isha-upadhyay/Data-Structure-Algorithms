@@ -1,0 +1,30 @@
+class Solution {
+  public:
+    Node *reverseKGroup(Node *head, int k) {
+        // code here
+        if (head == NULL) return head;
+
+    
+
+    // Step 2: Reverse k nodes
+    Node* prev = nullptr;
+    Node* curr = head;
+    Node* next;
+    int count = 0;
+    while (curr!=NULL && count<k){
+        next = curr->next;   // Store next node
+        curr->next = prev;   // Reverse current node's pointer
+        prev = curr;         // Move prev forward
+        curr = next;         // Move curr forward
+        count++;
+    }
+
+    // Step 3: Recursive call for remaining nodes
+    if (curr != NULL) {
+        head->next = reverseKGroup(curr, k); // Correctly connect remaining nodes
+    }
+
+    // Step 4: Return new head (prev is the new head after reversal)
+    return prev;
+    }
+};
