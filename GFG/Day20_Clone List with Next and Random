@@ -1,0 +1,43 @@
+class Solution {
+  public:
+    Node *cloneLinkedList(Node *head) {
+        // Write your code here
+        // Utility to print the list (for debugging)
+    
+
+   
+        if (!head) return nullptr; // Edge case: Empty list
+
+        Node* ptr = head;
+
+        // Step 1: Interleave nodes
+        while (ptr != nullptr) {
+            Node* newNode = new Node(ptr->data);
+            newNode->next = ptr->next;
+            ptr->next = newNode;
+            ptr = newNode->next; // Move to the next original node
+        }
+
+        // Step 2: Copy random pointers
+        ptr = head;
+        while (ptr != nullptr) {
+            if (ptr->random)
+                ptr->next->random = ptr->random->next;
+            ptr = ptr->next->next; // Skip the new node to move to the next original node
+        }
+
+        // Step 3: Separate the cloned list
+        ptr = head;
+        Node* newHead = head->next;
+        Node* newPtr = newHead;
+
+        while (ptr != nullptr) {
+            ptr->next = newPtr->next;
+            ptr = ptr->next;
+            if (newPtr->next)
+                newPtr->next = newPtr->next->next;
+            newPtr = newPtr->next;
+        }
+
+        return newHead; // Return the head of the cloned list
+    }
