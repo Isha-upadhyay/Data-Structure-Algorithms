@@ -1,0 +1,32 @@
+class Solution {
+public:
+    std::vector<int> lexicographicallySmallestArray(std::vector<int>& nums, int limit) {
+        std::vector<int> numsSorted = nums;
+        std::sort(numsSorted.begin(), numsSorted.end());
+
+        std::unordered_map<int, int> ntog;
+        std::unordered_map<int, std::queue<int>> gtol;
+        int grpCurr = 0;
+
+        ntog[numsSorted[0]] = grpCurr;
+        gtol[grpCurr].push(numsSorted[0]);
+
+        for (int i = 1; i < numsSorted.size(); i++) {
+            if (numsSorted[i] - numsSorted[i - 1] <= limit) {
+                gtol[grpCurr].push(numsSorted[i]);
+                ntog[numsSorted[i]] = grpCurr;
+            } else {
+                grpCurr++;
+                gtol[grpCurr].push(numsSorted[i]);
+                ntog[numsSorted[i]] = grpCurr;
+            }
+        }
+
+        for (int i = 0; i < nums.size(); i++) {
+            nums[i] = gtol[ntog[nums[i]]].front();
+            gtol[ntog[nums[i]]].pop();
+        }
+
+        return nums;
+    }
+};
