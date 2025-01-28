@@ -1,0 +1,35 @@
+class Solution {
+  public:
+
+void solve(string &s, vector<string> &ans, int index) {
+    if (index == s.length()) {
+        ans.push_back(s);
+        return;
+    }
+
+    // Visited set to ensure no duplicate swaps
+    set<char> visited;
+
+    for (int j = index; j < s.length(); j++) {
+        // Check if the character is already swapped at this level
+        if (visited.find(s[j]) != visited.end()) {
+            continue;
+        }
+
+        // Mark the character as visited
+        visited.insert(s[j]);
+
+        // Swap and recurse
+        swap(s[index], s[j]);
+        solve(s, ans, index + 1);
+        swap(s[index], s[j]); // Backtrack
+    }
+}
+    vector<string> findPermutation(string &s) {
+      vector<string> ans;
+    sort(s.begin(), s.end());  // String ko sort karte hain taaki duplicates saath ho
+    solve(s, ans, 0);
+    return ans;
+        
+    }
+};
