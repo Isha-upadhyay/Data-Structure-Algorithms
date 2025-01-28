@@ -1,6 +1,5 @@
 # Several Coding Patterns for Solving Data Structures and Algorithms Problems during Interviews
 
-
 |   |   |
 |---|---|
 | **Pattern 1: Sliding Window** | **Pattern 9: Two Heaps** |
@@ -11,9 +10,6 @@
 | **Pattern 6: In-place Reversal of a LinkedList** | **Pattern 14: K-way merge** |
 | **Pattern 7: Tree Breadth First Search** | **Pattern 15: 0/1 Knapsack (Dynamic Programming)** |
 | **Pattern 8: Depth First Search (DFS)** | **Pattern 16: Topological Sort (Graph)** |
-
-
-
 
 ## <span style="color:blue;">Pattern 1: Sliding Window</span>
 
@@ -29,7 +25,7 @@ A <b>brute-force</b> algorithm will calculate the sum of every 5-element contigu
 
 The efficient way to solve this problem would be to visualize each contiguous subarray as a sliding window of `5` elements. This means that we will slide the window by one element when we move on to the next subarray. To reuse the sum from the previous subarray, we will subtract the element going out of the window and add the element now being included in the sliding window. This will save us from going through the whole subarray to find the sum and, as a result, the algorithm complexity will reduce to `O(N)`.
 
-## Pattern 2: Two Pointer
+## <span style="color:blue;">Pattern 2: Two Pointer</span>
 
 In problems where we deal with sorted arrays (or <b>LinkedList</b>s) and need to find a set of elements that fulfill certain constraints, the Two Pointers approach becomes quite useful. The set of elements could be a pair, a triplet or even a subarray. For example, take a look at the following problem:
 
@@ -41,14 +37,13 @@ Given that the input array is sorted, an efficient way would be to start with on
 1. If the sum of the two numbers pointed by the <b> two pointers</b> is greater than the target sum, this means that we need a pair with a smaller sum. So, to try more pairs, we can decrement the end-pointer.
 2. If the sum of the two numbers pointed by the <b> two pointers</b> is smaller than the target sum, this means that we need a pair with a larger sum. So, to try more pairs, we can increment the start-pointer.
 
-## Pattern 3: Fast & Slow pointers
+## <span style="color:blue;">Pattern 3: Fast & Slow pointers</span>
 
 The <b>Fast & Slow</b> pointer approach, also known as the <b>Hare & Tortoise algorithm</b>, is a pointer algorithm that uses <b> two pointers</b> which move through the array (or sequence/<b>LinkedList</b>) at different speeds. This approach is quite useful when dealing with cyclic <b>LinkedList</b>s or arrays.
 
 By moving at different speeds (say, in a cyclic <b>LinkedList</b>), the algorithm proves that the <b> two pointers</b> are bound to meet. The <i>fast pointer</i> should catch the <i>slow pointer</i> once both the pointers are in a cyclic loop.
 
-
-## Pattern 4: Merge Intervals
+## <span style="color:blue;">Pattern 4: Merge Intervals</span>
 
 This pattern describes an efficient technique to deal with overlapping intervals. In a lot of problems involving intervals, we either need to find overlapping intervals or merge intervals if they overlap.
 
@@ -63,7 +58,7 @@ Given two intervals (`a` and `b`), there will be six distinct ways the two inter
 Understanding the above six cases will help us in solving all intervals related problems.
 ![](./images/mergeintervals.png)
 
-## Pattern 5: Cyclic Sort
+## <span style="color:blue;">Pattern 5: Cyclic Sort</span>
 
 This pattern describes an interesting approach to deal with problems involving arrays containing numbers in a given range. For example, take the following problem:
 
@@ -72,57 +67,54 @@ This pattern describes an interesting approach to deal with problems involving a
 To efficiently solve this problem, we can use the fact that the input array contains numbers in the range of `1` to `n`. 
 For example, to efficiently sort the array, we can try placing each number in its correct place, i.e., placing `1` at index `0`, placing `2` at index `1`, and so on. Once we are done with the sorting, we can iterate the array to find all indices that are missing the correct numbers. These will be our required numbers.
 
-## Pattern 6: In-place Reversal of a LinkedList
+## <span style="color:blue;">Pattern 6: In-place Reversal of a LinkedList</span>
 
 In a lot of problems, we are asked to reverse the links between a set of nodes of a <b>LinkedList</b>. Often, the constraint is that we need to do this <i>in-place</i>, i.e., using the existing node objects and without using extra memory.
 
 <b><i>in-place</i> Reversal of a <b>LinkedList</b> pattern</b> describes an efficient way to solve the above problem.
 
-## Pattern 7: Tree Breadth First Search
+## <span style="color:blue;">Pattern 7: Tree Breadth First Search</span>
+
 This pattern is based on the <b>Breadth First Search (BFS)</b> technique to traverse a tree.
 
 Any problem involving the traversal of a tree in a level-by-level order can be efficiently solved using this approach. We will use a <b>Queue</b> to keep track of all the nodes of a level before we jump onto the next level. This also means that the space complexity of the algorithm will be `O(W)`, where `W` is the maximum number of nodes on any level.
 
-## Pattern 8: Depth First Search (DFS)
+## <span style="color:blue;">Pattern 8: Depth First Search (DFS)</span>
+
 This pattern is based on the <b>Depth First Search (DFS)</b> technique to traverse a tree.
 
 We will be using recursion (or we can also use a stack for the iterative approach) to keep track of all the previous (parent) nodes while traversing. This also means that the space complexity of the algorithm will be `O(H)`, where `H` is the maximum height of the tree.
 
-## Pattern 9: Two Heaps
+## <span style="color:blue;">Pattern 9: Two Heaps</span>
 
 In many problems, where we are given a set of elements such that we can divide them into two parts. To solve the problem, we are interested in knowing the smallest element in one part and the biggest element in the other part. This pattern is an efficient approach to solve such problems.
 
 This pattern uses two <b>Heaps</b> to solve these problems; A <b>Min Heap</b> to find the smallest element and a <b>Max Heap</b> to find the biggest element.
 
-
-## Pattern 10: Subsets
+## <span style="color:blue;">Pattern 10: Subsets</span>
 
 A huge number of coding interview problems involve dealing with <b>Permutations</b> and <b>Combinations</b> of a given set of elements. This pattern describes an efficient <b>Breadth First Search (BFS)</b> approach to handle all these problems.
 
-## Pattern 11: Modified Binary Search
+## <span style="color:blue;">Pattern 11: Modified Binary Search</span>
 
 As we know, whenever we are given a sorted <b>Array</b> or <b>LinkedList</b> or <b>Matrix</b>, and we are asked to find a certain element, the best algorithm we can use is the <b>Binary Search</b>.
-## Pattern 12: Bitwise XOR
+
+## <span style="color:blue;">Pattern 12: Bitwise XOR</span>
+
 <b>XOR</b> is a logical bitwise operator that returns `0` (false) if both bits are the same and returns `1` (true) otherwise. In other words, it only returns `1` if exactly one bit is set to `1` out of the two bits in comparison.
 
-## [\Pattern 13: Top 'K' Elements
+## <span style="color:blue;">Pattern 13: Top 'K' Elements</span>
 
 Any problem that asks us to find the <b>top/smallest/frequent `K` elements</b> among a given set falls under this pattern.
 
+## <span style="color:blue;">Pattern 14: K-way merge</span>
 
+This pattern helps us solve problems that involve merging `k` sorted subarrays into a single sorted array. The best way to solve such problems is by using a <b>Min Heap</b> (for increasing order).
 
+## <span style="color:blue;">Pattern 15: 0/1 Knapsack (Dynamic Programming)</span>
 
-## Pattern 14: K-way merge
-This pattern helps us solve problems that involve a list of sorted arrays.
+The 0/1 Knapsack problem is a classic optimization problem that can be solved using dynamic programming. This problem is quite helpful in solving many related questions and optimization problems.
 
-Whenever we are given `K` sorted arrays, we can use a <b>Heap</b> to efficiently perform a sorted traversal of all the elements of all arrays. We can push the smallest (first) element of each sorted array in a <b>Min Heap</b> to get the overall minimum. While inserting elements to the <b>Min Heap</b> we keep track of which array the element came from. We can, then, remove the top element from the heap to get the smallest element and push the next element from the same array, to which this smallest element belonged, to the heap. We can repeat this process to make a sorted traversal of all elements.
+## <span style="color:blue;">Pattern 16: Topological Sort (Graph)</span>
 
-## Pattern 15: 0/1 Knapsack (Dynamic Programming)
-<b>0/1 Knapsack pattern</b> is based on the famous problem with the same name which is efficiently solved using <b>Dynamic Programming (DP)</b>.
-
-In this pattern, we will go through a set of problems to develop an understanding of <b>DP</b>. We will always start with a <b>brute-force</b> recursive solution to see the overlapping subproblems, i.e., realizing that we are solving the same problems repeatedly.
-
-After the recursive solution, we will modify our algorithm to apply advanced techniques of <b>Memoization</b> and <b>Bottom-Up Dynamic Programming</b> to develop a complete understanding of this pattern.
-
-## Pattern 16: 🔎 Topological Sort (Graph)
-<b>Topological Sort</b> is used to find a linear ordering of elements that have dependencies on each other. For example, if event `B` is dependent on event `A`, `A` comes before `B` in topological ordering.
+This pattern is used to solve problems that require finding a valid ordering of nodes in a Directed Acyclic Graph (DAG). This ordering ensures that for every directed edge `u → v`, node `u` comes before node `v` in the ordering.
