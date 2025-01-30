@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<vector<int>> res;
+
+    void solve(int col, int n, vector<int>& temp, vector<int>& leftRow, vector<int>& lowDiag, vector<int>& upDiag) {
+        if (col == n) {
+            res.push_back(temp); // Store the solution
+            return;
+        }
+        for (int row = 0; row < n; row++) {
+            // Check if it's safe to place the queen at (row, col)
+            if (leftRow[row] == 0 && lowDiag[row + col] == 0 && upDiag[n - 1 + col - row] == 0) {
+                // Place the queen
+                leftRow[row] = 1;
+                lowDiag[row + col] = 1;
+                upDiag[n - 1 + col - row] = 1;
+                temp.push_back(row + 1); // Store the row (1-indexed)
+
+                solve(col + 1, n, temp, leftRow, lowDiag, upDiag); // Recur for next column
+
+                // Backtrack
+                temp.pop_back();
+                leftRow[row] = 0;
+                lowDiag[row + col] = 0;
+                upDiag[n - 1 + col - row] = 0;
+            }
+        }
+    }
+
+    vector<vector<int>> nQueen(int n) {
+        vector<int> temp;
+        vector<int> leftRow(n, 0), lowDiag(2 * n - 1, 0), upDiag(2 * n - 1, 0);
+        solve(0, n, temp, leftRow, lowDiag, upDiag);
+        return res;
+    }
+};
