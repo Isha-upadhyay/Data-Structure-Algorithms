@@ -1,0 +1,38 @@
+class Solution {
+  public:
+    bool dfs(vector<vector<char>>& mat, string& word, int i, int j, int index, vector<vector<bool>>& visited){
+        if(index == word.size()){
+            return true;
+        }
+        int n = mat.size();
+        int m = mat[0].size();
+        
+        if(i < 0 || i>=n|| j<0|| j>=m|| mat[i][j] != word[index] || visited[i][j]) return false;
+        
+        visited[i][j] = true;
+        
+        bool directions = dfs(mat, word, i+1, j, index+1, visited) ||
+                     dfs(mat, word, i-1, j, index+1, visited) ||
+                     dfs(mat, word, i, j+1, index+1, visited) ||
+                     dfs(mat, word, i, j-1, index+1, visited);
+        
+        visited[i][j] = false;
+        
+        return directions;
+    }
+    bool isWordExist(vector<vector<char>>& mat, string& word) {
+        // Code here
+        int n = mat.size();
+        int m = mat[0].size();
+        
+        vector<vector<bool>> visited(n, vector<bool>(m , false));
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(mat[i][j] == word[0] && dfs(mat, word, i, j, 0, visited)) return true;
+                
+            }
+        }
+        return false;
+    }
+};
