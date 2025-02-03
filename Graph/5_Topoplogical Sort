@@ -1,3 +1,5 @@
+************** Approch 1(using DFS) **************
+
 class Solution {
   public:
     // Function to return list containing vertices in Topological order.
@@ -28,5 +30,53 @@ class Solution {
             st.pop();
         }
         return result;
+    }
+};
+
+
+
+
+************** Approch 2-using BFS(Kann's algo) **************
+
+class Solution {
+  public:
+    // Function to return list containing vertices in Topological order.
+    vector<int> topologicalSort(vector<vector<int>>& adj) {
+        // Your code here
+        queue<int> que;
+        int n = adj.size();
+        vector<int> indegree(n, 0);
+        
+        //indegree 
+        for(int u=0;u<n;u++){
+            for(int &v : adj[u]){
+                indegree[v]++;
+            }
+        }
+        
+        //fill que , indegree with 0
+        for(int i=0;i<n;i++){
+            if(indegree[i] == 0){
+                que.push(i);
+            }
+        }
+        
+        //simple BFS
+        vector<int> res;
+        
+        while(!que.empty()){
+            int u = que.front();
+            res.push_back(u);
+            que.pop();
+            
+            for(int &v : adj[u]){
+                indegree[v]--;
+                
+                if(indegree[v] == 0){
+                    que.push(v);
+                }
+            }
+        }
+        return res;
     }
 };
