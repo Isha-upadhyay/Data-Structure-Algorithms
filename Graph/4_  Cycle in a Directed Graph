@@ -1,4 +1,4 @@
-******* Using DFS ********
+******* Approch-1 (Using DFS) ********
 
 class Solution {
   public: 
@@ -28,5 +28,54 @@ class Solution {
             }
         }
         return false;
+    }
+};
+
+******* Approch 2 - topological sort(using BFS) *******
+
+class Solution {
+  public:
+    // Function to detect cycle in a directed graph.
+    bool isCyclic(int V, vector<vector<int>> adj) {
+        // code here
+         // Your code here
+        queue<int> que;
+        int n = adj.size();
+        vector<int> indegree(n, 0);
+        
+        //indegree 
+        for(int u=0;u<n;u++){
+            for(int &v : adj[u]){
+                indegree[v]++;
+            }
+        }
+        
+        //fill que , indegree with 0
+        int count = 0;
+        for(int i=0;i<n;i++){
+            if(indegree[i] == 0){
+                que.push(i);
+                count ++;
+            }
+        }
+        
+        //simple BFS
+        vector<int> res;
+        while(!que.empty()){
+            int u = que.front();
+            res.push_back(u);
+            que.pop();
+            
+            for(int &v : adj[u]){
+                indegree[v]--;
+                
+                if(indegree[v] == 0){
+                    que.push(v);
+                    count ++;
+                }
+            }
+        }
+       if(count == n) return false;
+       else return true;
     }
 };
