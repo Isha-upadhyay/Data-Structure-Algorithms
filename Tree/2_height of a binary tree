@@ -1,0 +1,26 @@
+class Solution {
+  public:
+    // Function to find the height of a binary tree.
+    int height(Node* node) {
+        // code here
+        if (!node) return -1; // Edge case: If tree is empty, height is -1
+
+    queue<Node*> q;
+    q.push(node); // Push root
+    int  height = -1;
+
+
+    while (!q.empty()) {
+        int n = q.size();
+        for(int i=0;i<n;i++){
+            Node* curr = q.front();
+            q.pop();
+            if (curr->left) q.push(curr->left); // Enqueue left child
+            if (curr->right) q.push(curr->right); // Enqueue right child
+        }
+   
+        height ++;
+    }
+    return height;
+    }
+};
