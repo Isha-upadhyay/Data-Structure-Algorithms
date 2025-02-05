@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool areAlmostEqual(string s1, string s2) {
+        int numdiff = 0;
+        int index1_diff = 0;
+        int index2_diff = 0;
+        for (int i = 0; i < s1.size(); i++) {
+            if (s1[i] !=s2[i]) {
+                numdiff++;
+                if (numdiff > 2)
+                    return false;
+                else if ( numdiff == 1) {
+                    index1_diff = i;
+                } else {
+                    index2_diff = i;
+                }
+            }
+        }
+        return s1[index1_diff] == s2[index2_diff] &&
+               s1[index2_diff] == s2[index1_diff];
+    }
+};
