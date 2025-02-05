@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int numSubseq(vector<int>& nums, int target) {
+        sort(nums.begin(), nums.end()); // Step 1: Sort nums
+        int mod = 1e9 + 7;               // Modulo value (to avoid overflow)
+        int left = 0, right = nums.size() - 1;  // Initialize two pointers
+        int ans = 0;  // Store the final result (total valid subsequences)
+
+        while (left <= right) {  // Step 2: Iterate with two pointers
+            if (nums[left] + nums[right] <= target) {
+                // If the sum of min and max is <= target
+                int count = 1;  // Start with count = 1 (for the subsequence with only the min and max)
+
+                // Step 3: Count all subsequences from left to right
+                for (int i = 0; i < (right - left); i++) {
+                    count = (count * 2) % mod;  // Multiply by 2 for each additional element (2^k subsequences)
+                }
+
+                ans = (ans + count) % mod;  // Add the count of subsequences to the result
+                left++;  // Move the left pointer to the right
+            } else {
+                right--;  // If the sum exceeds the target, move the right pointer to the left
+            }
+        }
+
+        return ans;  // Return the final count of valid subsequences
+    }
+};
