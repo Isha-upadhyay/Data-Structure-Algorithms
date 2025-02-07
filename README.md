@@ -118,9 +118,3 @@ The 0/1 Knapsack problem is a classic optimization problem that can be solved us
 ## <span style="color:blue;">Pattern 16: Topological Sort (Graph)</span>
 
 This pattern is used to solve problems that require finding a valid ordering of nodes in a Directed Acyclic Graph (DAG). This ordering ensures that for every directed edge `u → v`, node `u` comes before node `v` in the ordering.
-
-
-
-
-![Your GitHub Stats](https://github-readme-stats.vercel.app/api?username=Isha-upadhyay&show_icons=true&theme=radical)
-
