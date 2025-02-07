@@ -1,3 +1,4 @@
+***** Use in-place algotithm - means not use extra space *********
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
