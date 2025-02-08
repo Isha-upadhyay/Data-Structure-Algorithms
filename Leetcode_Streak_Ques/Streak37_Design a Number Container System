@@ -1,0 +1,36 @@
+class NumberContainers {
+private:
+    unordered_map<int, set<int>> numberToInd; // Har number ke saath ek sorted
+                                              // set of indices store karta hai.
+    unordered_map<int, int>
+        indexToNum; // Har index ke saath uska number store karta hai.
+public:
+    NumberContainers() {}
+
+    void change(int index, int number) {
+        if (indexToNum.find(index) != indexToNum.end() &&
+            indexToNum[index] != number) {
+            numberToInd[indexToNum[index]].erase(index);
+
+            if (numberToInd[indexToNum[index]].empty()) {
+                numberToInd.erase(indexToNum[index]);
+            }
+        }
+        indexToNum[index] = number;
+        numberToInd[number].insert(index);
+    }
+
+    int find(int number) {
+        if( numberToInd.find(number) !=  numberToInd.end()){
+            return *numberToInd[number].begin();
+        }
+        return -1;
+    }
+};
+
+/**
+ * Your NumberContainers object will be instantiated and called as such:
+ * NumberContainers* obj = new NumberContainers();
+ * obj->change(index,number);
+ * int param_2 = obj->find(number);
+ */
