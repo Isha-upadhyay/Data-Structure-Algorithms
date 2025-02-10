@@ -1,0 +1,46 @@
+// using has table and two pointer
+
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        if (s.size() < t.size()) return "";
+
+        unordered_map<char, int> freqOfT, currWindowFreq;
+
+        for(char c:t){
+            freqOfT[c]++;
+        }
+        
+        int left = 0, minLen = INT_MAX, startIdx = 0, target = freqOfT.size(), matchWord = 0;
+
+
+        for(int right=0;right<s.size();right++){
+            char c = s[right];
+            currWindowFreq[c]++;
+
+
+            if(freqOfT.count(c) &&    currWindowFreq[c] == freqOfT[c]) {
+                matchWord++;
+            }
+
+            while(matchWord == target){
+                if(right - left + 1< minLen){
+                    minLen = right - left + 1;
+                    startIdx = left;
+                }
+
+                char  leftChar= s[left];
+                currWindowFreq[leftChar]--;
+
+                if(freqOfT.count(leftChar) && currWindowFreq[leftChar] < freqOfT[leftChar]){
+                    matchWord--;
+                }
+                left++;
+            }
+        }
+
+        return (minLen == INT_MAX) ? "" : s.substr(startIdx, minLen);
+
+        
+    }
+};
