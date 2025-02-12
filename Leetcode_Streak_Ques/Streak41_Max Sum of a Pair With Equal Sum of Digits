@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int calculateDigitSum(int num) {
+        int sumOfDigit = 0;
+        while (num > 0) {
+            sumOfDigit += num % 10;
+            num /= 10;
+        }
+        return sumOfDigit;
+    }
+    int maximumSum(vector<int>& nums) {
+        vector<priority_queue<int, vector<int>, greater<int>>> digitsumNum(82);
+
+        int maxPairSum = -1;
+        for(int num : nums){
+            int sumOfDigit = calculateDigitSum(num);
+            digitsumNum[sumOfDigit].push(num);
+
+            if(digitsumNum[sumOfDigit].size()> 2){
+                digitsumNum[sumOfDigit].pop();
+            }
+        }
+
+
+         for (auto& minHeap : digitsumNum) {
+            if (minHeap.size() == 2) {
+                int first = minHeap.top();
+                minHeap.pop();
+                int second = minHeap.top();
+                maxPairSum = max(maxPairSum, first + second);
+            }
+        }
+
+        return maxPairSum;
+    }
+};
