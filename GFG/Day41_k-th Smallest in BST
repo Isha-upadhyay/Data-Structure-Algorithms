@@ -1,0 +1,22 @@
+class Solution {
+  public:
+    // Return the Kth smallest element in the given BST
+    int kthSmallest(Node *root, int k) {
+        // add code here.
+        stack<Node*> st;
+        Node* curr = root;
+        int cnt = 0;
+
+        while (!st.empty() || curr) {
+            while (curr) {
+                st.push(curr);
+                curr = curr->left;
+            }
+            curr = st.top(); st.pop();
+            cnt++;
+            if (cnt == k) return curr->data;
+            curr = curr->right;
+        }
+        return -1; // If k is invalid
+    }
+};
