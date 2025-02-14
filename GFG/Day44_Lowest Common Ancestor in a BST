@@ -1,0 +1,19 @@
+class Solution {
+  public:
+
+     
+    Node* LCA(Node* root, Node* n1, Node* n2) {
+        // code here
+           if (root == nullptr) return nullptr;
+
+        if (root->data == n1->data || root->data == n2->data) return root;
+
+        Node* leftLCA = LCA(root->left, n1, n2);
+        Node* rightLCA = LCA(root->right, n1, n2);
+
+        if (leftLCA && rightLCA) return root;
+
+        return (leftLCA != nullptr) ? leftLCA : rightLCA;
+    }
+    
+};
