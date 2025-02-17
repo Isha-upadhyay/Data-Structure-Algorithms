@@ -1,0 +1,16 @@
+class Solution {
+  public:
+    int maximumProfit(vector<int> &prices) {
+        // code here
+        int n = prices.size();
+        int maxProfit = 0;
+        int buy_day = INT_MAX;
+        
+        for(int i=0;i<n;i++){
+            buy_day = min(buy_day, prices[i]);
+            maxProfit = max(maxProfit, prices[i] - buy_day);
+           
+        }
+        return  maxProfit;
+    }
+};
