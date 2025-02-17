@@ -1,0 +1,35 @@
+   class Solution {
+  public:
+    vector<int> kLargest(vector<int>& arr, int k) {
+        // Your code here
+        priority_queue<int , vector<int> , greater<int>> minHeap;
+        
+        //push first k elements into the heap
+        
+        for(int i = 0 ; i < k ; i++){
+            minHeap.push(arr[i]);
+            
+        }
+        
+        //process the rest of the array
+        
+        for(int i = k ; i < arr.size() ; i++) {
+            if(arr[i] > minHeap.top()){
+                minHeap.pop();
+                minHeap.push(arr[i]);
+                
+            }
+        }
+        
+        //extarct elements and store in descending order
+        
+        vector<int> result(k);
+        for(int i = k - 1 ; i >= 0 ; i--){
+            result[i] = minHeap.top();
+            minHeap.pop();
+        }
+        
+        return result;
+        
+    }
+};
