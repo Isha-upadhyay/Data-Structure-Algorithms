@@ -1,0 +1,57 @@
+******Using minimum and maximum product ending at any index - O(n) Time and O(1) Space******
+
+class Solution {
+  public:
+    // Function to find maximum product subarray
+    int maxProduct(vector<int> &arr) {
+        // Your Code Here
+        int n = arr.size();
+        
+       
+        int currMin = arr[0];
+        int currMax = arr[0];
+        int maxProd = arr[0];
+        
+        for(int i=1;i<n;i++){
+            int temp = max(arr[i], max(arr[i]*currMax, arr[i]*currMin));
+            currMin  =  min(arr[i], min(arr[i]*currMax, arr[i]*currMin));
+            
+            currMax = temp;
+            
+            maxProd = max(maxProd, currMax);
+        }
+        return maxProd;
+        
+    }
+};
+
+
+
+******By traversing in both directions - O(n) Time and O(1) Space******
+
+
+class Solution {
+  public:
+    // Function to find maximum product subarray
+    int maxProduct(vector<int> &arr) {
+        // Your Code Here
+        int n = arr.size();
+        
+        int leftToRight = 1, rightToLeft = 1;
+        int maxProd = INT_MIN;
+        
+        for(int i=0;i<n;i++){
+            if(leftToRight == 0) leftToRight = 1;
+            if(rightToLeft == 0) rightToLeft = 1;
+            
+            leftToRight *= arr[i];
+            
+            int j = n-i-1;
+            rightToLeft *= arr[j];
+            
+            maxProd = max(max(rightToLeft, leftToRight), maxProd);
+        }
+        return maxProd;
+        
+        
+    }
