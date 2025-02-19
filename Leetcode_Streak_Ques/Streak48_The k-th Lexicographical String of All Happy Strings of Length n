@@ -1,0 +1,34 @@
+class Solution {
+public:
+    void generateHappyStrings(int n, int k, string& currString, int& count,
+                              string& result) {
+        if (currString.size() == n) {
+            count++;
+            if (count == k) {
+                result = currString;
+            }
+            return;
+        }
+
+        for (char currChar = 'a'; currChar <= 'c'; currChar++) {
+            if (!currString.empty() && currString.back() == currChar)
+                continue; // Skip if adjacent characters are the same
+
+            currString += currChar;
+
+            generateHappyStrings(n, k, currString, count, result);
+
+            if (!result.empty())
+                return;
+
+            currString.pop_back();
+        }
+    }
+    string getHappyString(int n, int k) {
+        string currString = "";
+        string result = "";
+        int count = 0;
+        generateHappyStrings(n, k, currString, count, result);
+        return result;
+    }
+};
