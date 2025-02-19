@@ -1,0 +1,38 @@
+class Solution {
+  public:
+    
+    struct Compare {
+    bool operator()(Node* a, Node* b) {
+        return a->data > b->data; // Min-Heap (smallest element at top)
+    }
+};
+    
+    Node* mergeKLists(vector<Node*>& arr) {
+        // Your code here
+         priority_queue<Node*, vector<Node*>, Compare> minHeap;
+        
+        for(Node* list: arr){
+            if(list){
+                minHeap.push(list);
+            }
+        }
+        
+        Node* dummy = new Node(0); // take a dummy node its point to null
+        Node* tail = dummy;  //tail point to dummy
+        
+        while(!minHeap.empty()){
+            Node* top = minHeap.top(); // take top smallest element and pop it
+            minHeap.pop();
+            
+            tail->next = top; // tail next point to that top element which extract
+            tail = tail->next;
+            
+            if(top->next){ // if the element extracted have next element then add in minheap
+                minHeap.push(top->next);
+            }
+        }
+        return dummy->next;
+        
+        
+    }
+};
