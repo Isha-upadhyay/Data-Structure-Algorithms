@@ -1,0 +1,57 @@
+******* Approch 1-using hasmap ******
+
+class Solution {
+  public:
+    // Function is to check whether two strings are anagram of each other or not.
+    bool areAnagrams(string& s1, string& s2) {
+        // Your code here
+        
+        unordered_map<char, int> charCount;
+        
+        for(char ch:s1){
+            charCount[ch]+=1;
+        }
+        
+        for(char ch:s2){
+            charCount[ch]-=1;
+        }
+        
+        for(auto& pair:charCount){
+            if(pair.second !=0){
+                return false;
+            }
+        }
+        return true;
+    }
+};
+
+
+****** Approch 2-using Frequency Array ******
+
+class Solution {
+  public:
+    // Function is to check whether two strings are anagram of each other or not.
+    
+    const int MAX_CHAR = 26;
+    
+    bool areAnagrams(string& s1, string& s2) {
+        // Your code here
+        vector<int> freq(MAX_CHAR, 0);
+        
+        for(char ch:s1){
+            freq[ch-'a']++;
+        }
+        
+         for(char ch:s2){
+            freq[ch-'a']--;
+        }
+        
+        for(int count : freq){
+            if(count!=0){
+                return false;
+            }
+        }
+        return true;
+       
+    }
+};
