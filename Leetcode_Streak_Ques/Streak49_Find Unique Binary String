@@ -1,0 +1,16 @@
+class Solution {
+public:
+    string findDifferentBinaryString(vector<string>& nums) {
+        string ans;  // This will store the final unique binary string
+        
+        // Iterate through each string in the list, using the diagonal approach
+        for (int i = 0; i < nums.size(); i++) {
+            char curr = nums[i][i];  // Get the character at the diagonal position (nums[i][i])
+            
+            // Flip the bit: if it's '0', make it '1'; if it's '1', make it '0'
+            ans += (curr == '0') ? '1' : '0';
+        }
+        
+        return ans;  // Return the unique binary string
+    }
+};
