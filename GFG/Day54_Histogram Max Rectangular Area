@@ -1,0 +1,71 @@
+***** Approch-1:(Stack)using concept next greater elemnt and next smaller element*****
+
+class Solution {
+  public:
+    int getMaxArea(vector<int> &arr) {
+        // Your code here
+        int n = arr.size();
+      stack < int > st;
+      int leftsmall[n], rightsmall[n];
+      for (int i = 0; i < n; i++) {
+        while (!st.empty() && arr[st.top()] >= arr[i]) {
+          st.pop();
+        }
+        if (st.empty())
+          leftsmall[i] = 0;
+        else
+          leftsmall[i] = st.top() + 1;
+        st.push(i);
+      }
+      // clear the stack to be re-used
+      while (!st.empty())
+        st.pop();
+
+      for (int i = n - 1; i >= 0; i--) {
+        while (!st.empty() && arr[st.top()] >= arr[i])
+          st.pop();
+
+        if (st.empty())
+          rightsmall[i] = n - 1;
+        else
+          rightsmall[i] = st.top() - 1;
+
+        st.push(i);
+      }
+      int maxA = 0;
+      for (int i = 0; i < n; i++) {
+        maxA = max(maxA, arr[i] * (rightsmall[i] - leftsmall[i] + 1));
+      }
+      return maxA;
+    
+    }
+};
+
+
+*******Approch-2:(Stack) using only next greater elemnt one pass only******
+
+class Solution {
+  public:
+    int getMaxArea(vector<int> &arr) {
+        // Your code here
+        stack < int > st;
+      int maxA = 0;
+      int n = arr.size();
+      for (int i = 0; i <= n; i++) {
+        while (!st.empty() && (i == n || arr[st.top()] >= arr[i])) {
+          int height = arr[st.top()];
+          st.pop();
+          int width;
+          if (st.empty())
+            width = i;
+          else
+            width = i - st.top() - 1;
+          maxA = max(maxA, width * height);
+        }
+        st.push(i);
+      }
+      return maxA;
+    
+    
+    }
+};
