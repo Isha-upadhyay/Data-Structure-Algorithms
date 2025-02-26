@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maxAbsoluteSum(vector<int>& nums) {
+        int n = nums.size();
+
+        int minSum = 0;
+        int maxSum = 0;
+        int maxOverall = 0, minOverall = 0;
+
+        for (int num : nums) {
+            maxSum = max(num, maxSum + num);
+            minSum = min(num, minSum + num);
+
+            maxOverall = max(maxOverall, maxSum);
+            minOverall = min(minOverall, minSum);
+        }
+        return max(abs(maxOverall), abs(minOverall));
+    }
+};
