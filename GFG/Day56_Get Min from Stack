@@ -1,0 +1,44 @@
+class Solution {
+  public:
+    vector<int> v1,v2;
+    Solution() {
+        // code here
+    }
+
+    // Add an element to the top of Stack
+    void push(int x) {
+        v1.push_back(x);
+        if(v1.size() == 1)
+            v2.push_back(x);
+        else
+        {
+            if(v2.back() > x) 
+                v2.push_back(x);
+        }
+    }
+    
+    // Remove the top element from the Stack
+    void pop() {
+        int x=-1;
+        if(v1.size() > 0)
+        {
+            if(v1.back() == v2.back())
+                v2.pop_back();
+            v1.pop_back();
+        }
+    }
+    
+    // Returns top element of the Stack
+    int peek() {
+        if(v1.size() > 0)
+            return v1.back();
+        return -1;
+        }
+        
+        // Finds minimum element of Stack
+    int getMin() {
+        if(v2.size() > 0)
+            return v2.back();
+        return -1;
+    }
+};
