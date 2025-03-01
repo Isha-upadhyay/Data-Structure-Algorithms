@@ -1,0 +1,26 @@
+class Solution {
+  public:
+    // Function to find hIndex
+    int hIndex(vector<int>& citations) {
+        // code here
+        int n = citations.size();
+        vector<int>freq(n + 1, 0);
+        
+        for(int count:citations){
+            if(count>=n){
+                freq[n]++;
+            }else{
+                freq[count]++;
+            }
+        }
+        
+        int total = 0;
+        for(int i=n;i>=0;i--){
+            total+=freq[i];
+            
+            if(total >= i){
+                return i;
+            }
+        }
+        return 0;
+    }
