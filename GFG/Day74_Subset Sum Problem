@@ -1,0 +1,25 @@
+class Solution {
+  public:
+         bool solve(vector<int>& arr, int sum, int i) {
+        
+        if(sum == 0){
+            return true;
+        }
+        if(i >= arr.size()){
+            return false;
+        }
+        if(arr[i] <= sum){
+            if(solve(arr,sum-arr[i],i+1)){
+                return true;
+            }
+        }
+        if(solve(arr,sum,i+1)){
+            return true;
+        }
+        return false;
+    }
+    bool isSubsetSum(vector<int>& arr, int sum) {
+        
+        return solve(arr,sum,0);
+    }
+};
