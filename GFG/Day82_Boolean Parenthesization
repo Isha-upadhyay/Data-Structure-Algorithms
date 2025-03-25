@@ -1,0 +1,49 @@
+class Solution {
+  public:
+      int rec(int i, int j, bool isTrue, vector<vector<vector<int>>>& DP, string &s) {
+        // Base case
+        if (i == j) {
+            if (isTrue) return s[i] == 'T';
+            else return s[i] == 'F';
+        }
+        
+        // Check if already computed
+        if (DP[i][j][isTrue] != -1) return DP[i][j][isTrue];
+    
+        int ways = 0;
+        
+        for (int k = i + 1; k < j; k += 2) {
+            int leftTrue = rec(i, k - 1, true, DP, s);
+            int leftFalse = rec(i, k - 1, false, DP, s);
+            int rightTrue = rec(k + 1, j, true, DP, s);
+            int rightFalse = rec(k + 1, j, false, DP, s);
+    
+            if (s[k] == '&') {
+                if (isTrue)
+                    ways += leftTrue * rightTrue;
+                else
+                    ways += leftTrue * rightFalse + leftFalse * rightTrue + leftFalse * rightFalse;
+            } 
+            else if (s[k] == '|') {
+                if (isTrue)
+                    ways += leftTrue * rightFalse + leftFalse * rightTrue + leftTrue * rightTrue;
+                else
+                    ways += leftFalse * rightFalse;
+            } 
+            else if (s[k] == '^') {
+                if (isTrue)
+                    ways += leftTrue * rightFalse + leftFalse * rightTrue;
+                else
+                    ways += leftTrue * rightTrue + leftFalse * rightFalse;
+            }
+        }
+    
+        return DP[i][j][isTrue] = ways;
+    }
+    int countWays(string &s) {
+        // code here
+        int n = s.size();
+        vector<vector<vector<int>>> DP(n, vector<vector<int>>(n, vector<int>(2, -1)));
+        return rec(0, n - 1, true, DP, s);
+    }
+};
