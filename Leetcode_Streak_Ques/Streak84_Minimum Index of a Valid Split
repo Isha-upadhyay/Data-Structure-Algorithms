@@ -25,7 +25,6 @@ public:
             if (nums[i] == maj) {
                 count++;
             }
-
             int remainCount = majCount - count;
             int n1 = i + 1;
             int n2 = n - i - 1;
