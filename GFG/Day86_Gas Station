@@ -1,0 +1,24 @@
+class Solution {
+  public:
+    int startStation(vector<int> &gas, vector<int> &cost) {
+        // Your code here
+           int check = 0;
+        int n = gas.size();
+        for (int i=0;i<n;i++){
+            check+= (gas[i]-cost[i]);
+        }
+        if (check<0){
+            return -1;
+        }
+        int index = 0;
+        int store = 0;
+        for (int i=0;i<n;i++){
+            store += (gas[i]-cost[i]);
+            if (store<0){
+                index = i+1;
+                store = 0;
+            }
+        }
+        return index;
+    }
+};
