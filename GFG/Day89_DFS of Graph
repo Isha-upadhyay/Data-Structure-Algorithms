@@ -1,0 +1,24 @@
+class Solution {
+  public:
+    
+ void DFS(int node, vector<vector<int>> &adj, vector<bool> &visited, vector<int> &result) {
+    visited[node] = true; // Mark current node as visited
+    result.push_back(node); // Add node to DFS traversal result
+
+    for (int neighbor : adj[node]) { // Traverse in the given order
+        if (!visited[neighbor]) {
+            DFS(neighbor, adj, visited, result);
+        }
+    }
+}
+    vector<int> dfs(vector<vector<int>>& adj) {
+        // Code here
+          int n = adj.size(); // Number of nodes
+    vector<bool> visited(n, false);
+    vector<int> result;
+    
+    DFS(0, adj, visited, result); // Start DFS from node 0
+
+    return result;
+    }
+};
