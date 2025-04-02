@@ -1,0 +1,23 @@
+void mergeTwoSortedArraysWithoutExtraSpace(vector<long long> &a, vector<long long> &b){
+	// Write your code here.
+	 int n = a.size();
+    int m = b.size();
+
+    int left = n - 1;
+    int right = 0;
+
+    // Swap elements to maintain order
+    while (left >= 0 && right < m) {
+        if (a[left] > b[right]) {
+            swap(a[left], b[right]);
+            left--;
+            right++;
+        } else {
+            break;
+        }
+    }
+
+    // Sort both arrays after swapping
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+}
