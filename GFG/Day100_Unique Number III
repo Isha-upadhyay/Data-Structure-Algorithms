@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    int getSingle(vector<int> &arr) {
+        // code here
+        int n = arr.size();
+        unordered_map<int, int> mp;
+        int res = 0;
+        for(int i=0;i<n;i++){
+            mp[arr[i]]++;
+        }
+        
+        for(auto& a:mp){
+            if(a.second == 1){
+                res = a.first;
+            }
+        }        
+        return res;
+    }
+}
