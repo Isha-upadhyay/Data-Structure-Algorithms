@@ -1,0 +1,21 @@
+class Solution {
+  public:
+    vector<int> singleNum(vector<int>& arr) {
+        // Code here.
+        int n = arr.size();
+        unordered_map<int, int> mp;
+        vector<int> res;
+        
+        for(int i=0;i<n;i++){
+            mp[arr[i]]++;
+        }
+        
+        for(auto& a:mp){
+            if(a.second == 1){
+                res.push_back(a.first);
+            }
+        }       
+        sort(res.begin(), res.end());
+        return res;
+    }
+};
