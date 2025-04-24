@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int digitSum(int n){
+        int sum = 0;
+        while(n){
+            sum += n % 10;
+            n = n / 10;
+        }
+        return sum;
+    }
+    int countLargestGroup(int n) {
+        unordered_map<int, int> group; // digitSum, no. element in group
+        int maxSize = 0 ;// size of group
+
+        for(int i=1;i<=n;i++){
+            int sum = digitSum(i);
+            group[sum]++;
+            maxSize = max(maxSize, group[sum]);
+        }
+
+        int count = 0;
+        for(auto& [key, value]: group){
+            if(value == maxSize) count++;
+        }
+
+        return count;
+    }
+};
