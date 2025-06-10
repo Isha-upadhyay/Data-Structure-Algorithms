@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int maxDifference(string s) {
+        int n = s.size();
+        unordered_map<char, int> freq;
+        for (char c : s) {
+            freq[c]++;
+        }
+        int maxOdd = INT_MIN, minEven = INT_MAX;
+        bool hasOdd = false, hasEven = false;
+
+        for (auto& [ch, count] : freq) {
+            if (count % 2 == 0) {
+                minEven = min(minEven, count);
+                hasEven = true;
+            } else {
+                maxOdd = max(maxOdd, count);
+                hasOdd = true;
+            }
+        }
+        if (!hasOdd || !hasEven)
+            return 0;
+        return maxOdd - minEven;
+    }
+};
