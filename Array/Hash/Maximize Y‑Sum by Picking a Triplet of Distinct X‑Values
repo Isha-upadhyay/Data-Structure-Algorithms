@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int maxSumDistinctTriplet(vector<int>& x, vector<int>& y) {
+        int n = x.size();
+        unordered_map<int, int>xToMaxY;
+       
+        for(int i=0;i<n;i++){
+            xToMaxY[x[i]] = max(xToMaxY[x[i]], y[i]);
+        }
+
+        if(xToMaxY.size()<3) return -1;
+
+        vector<int> maxYvalue;
+        for( auto& pair : xToMaxY){
+            maxYvalue.push_back(pair.second);
+        }
+        sort(maxYvalue.begin(), maxYvalue.end(), greater<int>());
+
+        return maxYvalue[0] + maxYvalue[1] + maxYvalue[2];
+        
+    }
+};
