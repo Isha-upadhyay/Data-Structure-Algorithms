@@ -1,0 +1,35 @@
+class Solution {
+  public:
+    vector<int> jobSequencing(vector<int> &deadline, vector<int> &profit) {
+        // code here
+        
+        int n = deadline.size();
+        int count = 0;
+        int sum = 0;
+        
+        vector<pair<int, int>> job;
+        for(int i=0;i<n;i++){
+            pair<int, int> p =  make_pair(deadline[i], profit[i]);
+            job.push_back(p);
+        }
+        
+        sort(job.begin(), job.end());
+        priority_queue<int,vector<int>,greater<int>>pq;
+        
+        for(int i=0;i<n;i++){
+            if(job[i].first > count){
+                count++;
+                sum+=job[i].second;
+                pq.push(job[i].second);
+            }else{
+                sum-=pq.top();
+                pq.pop();
+                sum+=job[i].second;
+                pq.push(job[i].second);
+            }
+        }
+        return {count, sum};
+         
+        
+    }
+};
