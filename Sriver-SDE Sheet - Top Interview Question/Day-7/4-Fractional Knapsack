@@ -1,0 +1,39 @@
+class Solution {
+  public:
+    static  bool comp(pair<double, pair<int, int>> &a, pair<double, pair<int, int>> &b){
+        return a.first > b.first;
+    }
+    double fractionalKnapsack(vector<int>& val, vector<int>& wt, int capacity) {
+        // code here
+        
+        int n = val.size();
+        
+        vector<pair<double, pair<int, int>>> items;
+        
+        for(int i=0;i<n;i++){
+            double ratio = (double)val[i] / wt[i];
+            items.push_back({ratio, {val[i], wt[i]}});
+        }
+        
+        sort(items.begin(), items.end(), comp);
+        
+        double totalVal = 0.0;
+        int currWeight = 0;
+        
+        for(int i=0;i<n;i++){
+            int itemValue = items[i].second.first;
+            int itemWeight = items[i].second.second;
+            
+            if(currWeight + itemWeight <= capacity){
+                currWeight+=itemWeight;
+                 totalVal+=itemValue;
+            }else{
+                int remain = capacity - currWeight;
+                totalVal += (double)itemValue / itemWeight * remain; 
+                break;
+            }
+        }
+        return totalVal;
+        
+    }
+};
