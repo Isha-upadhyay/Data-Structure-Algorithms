@@ -1,22 +1,25 @@
-bool isSubsetSumRec(vector<int>& arr, int n, int sum) {
-  
-    // Base Cases
-    if (sum == 0)
-        return true;
-    if (n == 0)
+class Solution {
+  public:
+         bool solve(vector<int>& arr, int sum, int i) {
+        
+        if(sum == 0){
+            return true;
+        }
+        if(i >= arr.size()){
+            return false;
+        }
+        if(arr[i] <= sum){
+            if(solve(arr,sum-arr[i],i+1)){
+                return true;
+            }
+        }
+        if(solve(arr,sum,i+1)){
+            return true;
+        }
         return false;
-
-    // If last element is greater than sum,
-    // then ignore it
-    if (arr[n - 1] > sum)
-        return isSubsetSumRec(arr, n - 1, sum);
-
-    // Check if sum can be obtained by including 
-  	// or excluding the last element
-    return isSubsetSumRec(arr, n - 1, sum) 
-      		|| isSubsetSumRec(arr, n - 1, sum - arr[n - 1]);
-}
-
-bool isSubsetSum(vector<int>& arr, int sum) {
-    return isSubsetSumRec(arr, arr.size(), sum);
-}
+    }
+    bool isSubsetSum(vector<int>& arr, int sum) {
+        
+        return solve(arr,sum,0);
+    }
+};
