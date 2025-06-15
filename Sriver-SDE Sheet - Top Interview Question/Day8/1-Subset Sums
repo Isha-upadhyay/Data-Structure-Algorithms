@@ -1,0 +1,22 @@
+bool isSubsetSumRec(vector<int>& arr, int n, int sum) {
+  
+    // Base Cases
+    if (sum == 0)
+        return true;
+    if (n == 0)
+        return false;
+
+    // If last element is greater than sum,
+    // then ignore it
+    if (arr[n - 1] > sum)
+        return isSubsetSumRec(arr, n - 1, sum);
+
+    // Check if sum can be obtained by including 
+  	// or excluding the last element
+    return isSubsetSumRec(arr, n - 1, sum) 
+      		|| isSubsetSumRec(arr, n - 1, sum - arr[n - 1]);
+}
+
+bool isSubsetSum(vector<int>& arr, int sum) {
+    return isSubsetSumRec(arr, arr.size(), sum);
+}
