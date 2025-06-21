@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int minimumDeletions(string word, int k) {
+        unordered_map<char, int> freqMap;
+        for(int c:word){
+            freqMap[c]++;
+        }
+        
+        vector<int>freq;
+        for(auto& pair:freqMap){
+            freq.push_back(pair.second);
+        }
+
+        sort(freq.begin(), freq.end());
+        int n = freq.size();
+        int ans = INT_MAX;
+        
+        for(int i=0;i<n;i++){
+            int deletions = 0;
+            int intialRange = freq[i];
+            int lastRange = intialRange + k;
+
+            for(int j=0;j<n;j++){
+                if(freq[j] < intialRange){
+                    deletions+=freq[j];
+                }else if(freq[j] > lastRange){
+                    deletions+=freq[j] - lastRange ;
+                }
+            }
+            ans =  min(ans, deletions);
+        }
+
+       return ans;
+    }
+};
