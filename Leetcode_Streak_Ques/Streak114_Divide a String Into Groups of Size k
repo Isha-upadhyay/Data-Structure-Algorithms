@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<string> divideString(string s, int k, char fill) {
+        int n = s.size();
+
+        vector<string> res;
+        int curr = 0;
+        while(curr < n){
+            res.push_back(s.substr(curr, k));
+            curr+=k;
+        }
+
+        res.back() += string(k-res.back().length(), fill);
+        return res;
+    }
+};
