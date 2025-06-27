@@ -1,0 +1,32 @@
+class Solution {
+    vector<long long> cost;
+    vector<vector<int>> r;
+    mt19937_64 mt; // generate random seed 123 
+public:
+    Solution(vector<vector<int>>& rects) {
+        r = rects;
+        for(auto &uidx: r){
+            long long x = uidx[2] - uidx[0] + 1;
+            long long y = uidx[3] - uidx[1] + 1;
+            cost.push_back((cost.empty()?0:cost.back()) + x * y);  // prefix sum: last sum + current rectangle ka area
+        }
+    }
+    
+    vector<int> pick() {
+        auto g =  mt() % cost.back(); // total points me se ek random point ka index g
+        auto idx = upper_bound(cost.begin(), cost.end(), g) - cost.begin(); // g kis rectangle me aata hai
+        int height = r[idx][3] - r[idx][1] + 1;
+        if(idx > 0)
+           g-=cost[idx-1]; // global g ko local index me convert karo
+        return vector<int>{
+            (int)(r[idx][0] + g/height), // x coordinate = x1 + row offset
+            (int)(r[idx][1] + g%height),  // y coordinate = y1 + column offset
+        };
+    }
+};
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(rects);
+ * vector<int> param_1 = obj->pick();
+ */
