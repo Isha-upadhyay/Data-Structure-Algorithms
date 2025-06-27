@@ -1,0 +1,40 @@
+class Solution {
+  public:
+    bool isSafe(int vertex, int col, vector<int> adj[], vector<int> &color){
+        for(auto it : adj[vertex]){
+            
+            if(color[it] != -1 && col==color[it]){ // if adjacent has the same color, not safe
+                return false;
+            }
+          
+        }
+          return true;
+    }
+    bool cancolor(int vertex, int m, vector<int> adj[], vector<int> &color){
+        if(vertex == color.size()) return true;
+        
+        for(int i=0;i<m;i++){
+            if(isSafe(vertex, i, adj, color)){
+                color[vertex] = i;
+                if(cancolor(vertex+1, m, adj, color)) return true;
+                color[vertex] = -1;
+            }
+        }
+        return false;
+        
+    }        
+    bool graphColoring(int v, vector<vector<int>> &edges, int m) {
+        // code here
+        vector<int> adj[v];
+        
+        for(auto it : edges){
+            adj[it[0]].push_back(it[1]);
+            adj[it[1]].push_back(it[0]);
+        }
+        
+        vector<int> color(v, -1);
+        return cancolor(0, m, adj, color);
+    }
+        
+    
+};
