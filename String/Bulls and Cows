@@ -1,0 +1,33 @@
+class Solution {
+public:
+    string getHint(string secret, string guess) {
+        unordered_map<char,int> mp;
+        int cow = 0, bull = 0;
+        string ans;
+
+        //step 1 - count all secret digit 
+        for(int i=0;i< secret.length(); i++){
+            mp[secret[i]]++;
+        }
+
+        //step2 - count bulls and reduce that count from map
+        for(int i=0;i<secret.length(); i++){
+            if(secret[i] == guess[i]){
+                bull++;
+                mp[secret[i]]--;
+            }
+        }
+
+           // step-3 count cows 
+           for(int i=0;i<secret.length(); i++){
+            if(secret[i] != guess[i] && mp[guess[i]] > 0){
+                cow++;
+                mp[guess[i]]--;
+            }
+        }
+
+        ans+= to_string(bull) + 'A' + to_string(cow) + 'B';
+        return ans;
+
+    }
+};
