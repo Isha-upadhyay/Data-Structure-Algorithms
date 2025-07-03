@@ -1,0 +1,25 @@
+class Solution {
+public:
+    char kthCharacter(int k) {
+        int shifts = 0;
+        while(k > 1){
+            int length = 1;
+
+            while(length*2 < k){
+                length*=2;
+                
+            }
+
+            if(k > length){
+                k  -= length;
+                shifts++;
+            }else{
+
+            }
+
+        }
+
+        char res = 'a' + shifts;
+        return (res > 'z') ? res - 26 : res;
+    }
+};
