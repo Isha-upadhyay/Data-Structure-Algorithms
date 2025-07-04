@@ -1,0 +1,40 @@
+class Solution {
+  public:
+   
+    bool canPlaceAllCows(vector<int> &stalls, int k, int dist){
+        int cnt = 1;
+        int prev = stalls[0];
+        
+        for(int i=1;i<stalls.size();i++){
+            if(stalls[i] - prev >= dist){
+                prev = stalls[i];
+                cnt++;
+            }
+        }
+        return (cnt >= k);
+    }
+
+    int aggressiveCows(vector<int> &stalls, int k) {
+
+        // Write your code here
+        sort(stalls.begin(), stalls.end());
+        int res = 0;
+        
+        int low = 1;
+        int high =  stalls.back() - stalls[0];
+        
+        while(low <= high){
+            int mid = low + (high-low)/2;
+            
+            if(canPlaceAllCows(stalls, k, mid)){
+                res = mid;
+                low = mid + 1;
+            }else{
+                high = mid - 1;
+            }
+        }
+        return res;
+        
+        
+    }
+};
