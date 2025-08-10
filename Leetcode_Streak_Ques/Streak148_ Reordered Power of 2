@@ -1,0 +1,31 @@
+class Solution {
+public:
+    unordered_map<char, int> countDigits(int num) {
+        unordered_map<char, int> freq;
+        string num_str = to_string(num);
+
+        // Count digits
+        for (char c : num_str) {
+            freq[c]++;
+        }
+
+        return freq;
+    }
+        bool reorderedPowerOf2(int n) {
+            // Count the frequency of digits in the input number n
+            unordered_map<char, int> n_count = countDigits(n);
+
+            // Check all powers of 2 up to 10^9
+            for (int i = 0; i < 31; i++) {
+                int power_of_2 = 1 << i; // 2^i
+
+                // Compare the digit count of power_of_2 and n
+                if (countDigits(power_of_2) == n_count) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    
+};
