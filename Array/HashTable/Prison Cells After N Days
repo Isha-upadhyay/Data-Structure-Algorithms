@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<int> prisonAfterNDays(vector<int>& cells, int n) {
+        unordered_map<string, int> lastSeen;
+
+        while (n > 0) {
+            string state = "";
+            for (int c : cells)
+                state += to_string(c);
+
+            if (lastSeen.count(state)) {
+                int cycle_length = lastSeen[state] - n;
+                n %= cycle_length;
+            }
+            lastSeen[state] = n;
+
+            if (n > 0) {
+                n--;
+                vector<int> next(8, 0);
+
+                for (int i = 1; i < 7; i++) {
+                    next[i] = (cells[i - 1] == cells[i + 1]) ? 1 : 0;
+                }
+
+                cells = next;
+            }
+        }
+        return cells;
+    }
+};
