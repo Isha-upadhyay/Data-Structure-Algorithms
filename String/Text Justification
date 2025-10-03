@@ -1,0 +1,58 @@
+class Solution {
+public:
+    string findLine(int i, int j, int eachSlotSpace, int extraSpaceSlot, vector<string>& words, int maxWidth) {
+        string line;
+        for (int k = i; k < j; k++) {
+            line += words[k];
+
+            if (k == j - 1) continue; // last word, no space after
+
+            // add even spaces
+            for (int z = 0; z < eachSlotSpace; z++) line += " ";
+
+            // add extra space to left slots
+            if (extraSpaceSlot > 0) {
+                line += " ";
+                extraSpaceSlot--;
+            }
+        }
+
+        // pad spaces at end if needed (last line or single word)
+        while (line.length() < maxWidth) line += " ";
+        return line;
+    }
+
+    vector<string> fullJustify(vector<string>& words, int maxWidth) {
+        vector<string> res;
+        int n = words.size();
+        int i = 0;
+
+        while (i < n) {
+            int lettersCount = words[i].length();
+            int j = i + 1;
+            int slots = 0;
+
+            // --- Greedy: find words that fit in this line ---
+            while (j < n && lettersCount + 1 + words[j].length() + slots <= maxWidth) {
+                lettersCount += words[j].length();
+                slots += 1;
+                j++;
+            }
+
+            int remainingSlot = maxWidth - lettersCount;
+            int eachSlotSpace = (slots == 0 ? 0 : remainingSlot / slots);
+            int extraSpaceSlot = (slots == 0 ? 0 : remainingSlot % slots);
+
+            // last line left-justify
+            if (j == n) {
+                eachSlotSpace = 1;
+                extraSpaceSlot = 0;
+            }
+
+            res.push_back(findLine(i, j, eachSlotSpace, extraSpaceSlot, words, maxWidth));
+            i = j; // move to next line
+        }
+
+        return res;
+    }
+};
