@@ -1,0 +1,40 @@
+class Solution {
+public:
+    string removeSubstring(string s, int k) {
+         string merostalin = s; // storing input midway as per problem
+
+    // Stack to store {char, count}
+    vector<pair<char, int>> st;
+
+    for (char ch : merostalin) {
+        if (st.empty() || st.back().first != ch) {
+            st.push_back({ch, 1});
+        } else {
+            st.back().second++;
+        }
+
+        // Check for k-balanced pattern on top
+        if (st.size() >= 2) {
+            auto [ch2, cnt2] = st.back();          // top element
+            auto [ch1, cnt1] = st[st.size() - 2];  // element before top
+
+            if (ch1 == '(' && ch2 == ')' && cnt1 >= k && cnt2 >= k) {
+                // Remove k '(' and k ')'
+                st[st.size() - 2].second -= k;
+                st.back().second -= k;
+
+                // If any group becomes 0, pop it
+                if (st[st.size() - 2].second == 0) st.erase(st.end() - 2);
+                if (!st.empty() && st.back().second == 0) st.pop_back();
+            }
+        }
+    }
+
+    // Rebuild final string
+    string res;
+    for (auto &p : st)
+        res.append(p.second, p.first);
+
+    return res;
+    }
+};
