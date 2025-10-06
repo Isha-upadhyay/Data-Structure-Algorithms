@@ -1,0 +1,38 @@
+class Solution {
+#define all(x) x.begin(), x.end()
+public:
+    vector<bool> subsequenceSumAfterCapping(vector<int> &arr, int k) {
+        int n = arr.size();
+        sort(all(arr));                  // Step 1: Sort the array
+        vector<bool> sum(k + 1, 0), ans(n, 0);
+        sum[0] = 1;                      // Base case: sum 0 is always possible
+
+        // sum[i] => whether sum i can be formed using elements < current cap x
+        // ans[x-1] => whether sum k is possible when each element is capped at x
+
+        for (int i = 0, x = 1; x <= n; x++) {
+            // Step 2: Add all elements < x into the DP (subset-sum style)
+            while (i < n && arr[i] < x) {
+                for (int j = k; j >= arr[i]; j--) {
+                    if (sum[j - arr[i]])
+                        sum[j] = 1;
+                }
+                i++;
+            }
+
+            // Step 3: Count of elements >= x
+            int bigger = n - i;
+
+            // Step 4: Try taking j elements of value x (0 <= j <= bigger)
+            // and check if remaining (k - j*x) can be made by smaller ones
+            for (int j = 0; j <= bigger && j * x <= k; j++) {
+                if (sum[k - j * x]) {
+                    ans[x - 1] = 1;
+                    break;
+                }
+            }
+        }
+
+        return ans;
+    }
+};
