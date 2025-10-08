@@ -1,0 +1,51 @@
+class Solution {
+public:
+    bool adj(char a, char b) {
+
+        int diff = abs(a - b);
+        return diff == 1 || diff == 25;
+    }
+    string lexicographicallySmallestString(string s) {
+        int n = s.size();
+
+        vector<vector<bool>> removable(n, vector<bool>(n, false));
+
+        // base case
+        for (int i = 1; i < n; i++) {
+            if (adj(s[i], s[i - 1]))
+                removable[i - 1][i] = true;
+        }
+
+        for (int len = 3; len <= n; len++) {
+            for (int i = 0; i + len - 1 < n; i++) {
+                int left = i, right = i + len - 1;
+
+                if (adj(s[left], s[right]) && removable[left + 1][right - 1]) {
+                    removable[left][right] = true;
+                    continue;
+                }
+
+                for (int k = left + 1; k < right; k++) {
+                    if (removable[left][k] && removable[k + 1][right]) {
+                        removable[left][right] = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        vector<string> dp(n + 1, "");
+        dp[n] = "";
+
+        for (int i = n - 1; i >= 0; i--) {
+            dp[i] = s[i] + dp[i + 1];
+
+            for (int j = i + 1; j < n; j++) {
+                if (removable[i][j]) {
+                    dp[i] = min(dp[i], dp[j + 1]);
+                }
+            }
+        }
+        return dp[0];
+    }
+};
