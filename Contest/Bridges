@@ -1,0 +1,58 @@
+// Write your code here
+
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<vector<int>> adj; // adjaceny list
+vector<int> disc, low; //discovery and low times
+vector<pair<int,int>> bridges;
+int timer = 0;
+
+void dfs(int u, int parent){
+    disc[u] = low[u] = ++timer;
+
+    for(int v : adj[u]){
+        if(v==parent) continue; // skip parent edge
+
+        if(!disc[v]){ 
+            dfs(v, u);
+            low[u] = min(low[u], low[v]);
+
+            if(low[v] > disc[u]){
+                bridges.push_back({min(u, v), max(u, v)});
+            }
+
+        }else{ // back edge
+            low[u] = min(low[u], disc[v]);
+        }
+    }
+}
+
+int main(){
+    int n, m;
+    cin >> n>> m;
+
+    adj.assign(n+1, {});
+    disc.assign(n+1, 0);
+    low.assign(n+1, 0);
+
+    for(int i=0;i<m;i++){
+        int a, b;
+        cin >> a >>b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+
+    for(int i=1;i<=n;i++){
+        if(!disc[i])
+        dfs(i, -1);
+    }
+
+    sort(bridges.begin(), bridges.end());
+
+    for(auto &p:bridges){
+        cout << p.first << " " << p.second << "\n";
+    }
+
+    return 0;
+}
