@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<long long> resultArray(vector<int>& nums, int k) {
+        vector<long long> res(k, 0);
+        vector<long long> prev(k, 0);
+        for (int num : nums) {
+            int numm = num % k;
+            vector<long long> curr(k, 0);
+            curr[numm]++;
+            for (int r = 0; r < k; ++r) {
+                if (prev[r] > 0) {
+                    curr[(int) ((r * (long long) numm) % k)] += prev[r];
+                }
+            }
+            for (int r = 0; r < k; ++r) {
+                res[r] += curr[r];
+            }
+            prev = curr;
+        }
+        return res;
+    }
+};
