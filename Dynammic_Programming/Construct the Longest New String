@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int longestString(int x, int y, int z) {
+        // Step 1: jitne "AA" aur "BB" alternate ho sakte hain
+        int pairs = min(x, y);
+        
+        // Step 2: agar x aur y barabar nahi hain -> ek extra le sakte hain safely
+        int extra = (x != y) ? 1 : 0;
+        
+        // Step 3: total strings (AA + BB + AB)
+        int totalStrings = pairs * 2 + extra + z;
+        
+        // Step 4: har string ki length = 2
+        return totalStrings * 2;
+    }
+};
