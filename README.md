@@ -118,3 +118,23 @@ The 0/1 Knapsack problem is a classic optimization problem that can be solved us
 ## <span style="color:blue;">Pattern 16: Topological Sort (Graph)</span>
 
 This pattern is used to solve problems that require finding a valid ordering of nodes in a Directed Acyclic Graph (DAG). This ordering ensures that for every directed edge `u → v`, node `u` comes before node `v` in the ordering.
+
+<!---LeetCode Topics Start-->
+# LeetCode Topics
+## Array
+|  |
+| ------- |
+| [3514-number-of-unique-xor-triplets-ii](https://github.com/Isha-upadhyay/Data-Structure-Algorithms/tree/master/3514-number-of-unique-xor-triplets-ii) |
+## Math
+|  |
+| ------- |
+| [3514-number-of-unique-xor-triplets-ii](https://github.com/Isha-upadhyay/Data-Structure-Algorithms/tree/master/3514-number-of-unique-xor-triplets-ii) |
+## Bit Manipulation
+|  |
+| ------- |
+| [3514-number-of-unique-xor-triplets-ii](https://github.com/Isha-upadhyay/Data-Structure-Algorithms/tree/master/3514-number-of-unique-xor-triplets-ii) |
+## Enumeration
+|  |
+| ------- |
+| [3514-number-of-unique-xor-triplets-ii](https://github.com/Isha-upadhyay/Data-Structure-Algorithms/tree/master/3514-number-of-unique-xor-triplets-ii) |
+<!---LeetCode Topics End-->
