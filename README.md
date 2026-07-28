@@ -137,4 +137,16 @@ This pattern is used to solve problems that require finding a valid ordering of 
 |  |
 | ------- |
 | [3514-number-of-unique-xor-triplets-ii](https://github.com/Isha-upadhyay/Data-Structure-Algorithms/tree/master/3514-number-of-unique-xor-triplets-ii) |
+## Hash Table
+|  |
+| ------- |
+| [0142-linked-list-cycle-ii](https://github.com/Isha-upadhyay/Data-Structure-Algorithms/tree/master/0142-linked-list-cycle-ii) |
+## Linked List
+|  |
+| ------- |
+| [0142-linked-list-cycle-ii](https://github.com/Isha-upadhyay/Data-Structure-Algorithms/tree/master/0142-linked-list-cycle-ii) |
+## Two Pointers
+|  |
+| ------- |
+| [0142-linked-list-cycle-ii](https://github.com/Isha-upadhyay/Data-Structure-Algorithms/tree/master/0142-linked-list-cycle-ii) |
 <!---LeetCode Topics End-->
